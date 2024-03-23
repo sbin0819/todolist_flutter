@@ -1,29 +1,26 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:todolist/data/local/collection/todo_db_model.dart';
+
 import '../screen/main/home/todo_status.dart';
 
-class Todo {
-  int id;
-  String content;
-  DateTime createdTime;
-  DateTime? modifyTime;
-  DateTime dueDate;
-  TodoStatus status;
+part 'todo_model.freezed.dart';
+part 'todo_model.g.dart';
 
-  Todo({
-    required this.id,
-    required this.content,
-    required this.dueDate,
-    this.status = TodoStatus.incomplete,
+@unfreezed
+class Todo with _$Todo {
+  Todo._();
+
+  factory Todo({
+    required final int id,
+    required final DateTime createdTime,
+    required String content,
     DateTime? modifyTime,
-  }) : createdTime = DateTime.now();
+    required DateTime dueDate,
+    @Default(TodoStatus.unknown) TodoStatus status,
+  }) = _Todo;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'content': content,
-      'createdTime': createdTime.millisecondsSinceEpoch,
-      'modifyTime': modifyTime?.millisecondsSinceEpoch,
-      'dueDate': dueDate.millisecondsSinceEpoch,
-      'status': status.index,
-    };
-  }
+  factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+
+  TodoDbModel get dbModel =>
+      TodoDbModel(id, createdTime, modifyTime, content, dueDate, status);
 }

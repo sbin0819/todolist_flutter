@@ -1,5 +1,5 @@
 import 'package:todolist/common/simple_result.dart';
-import 'package:todolist/features/vo_todo.dart';
+import 'package:todolist/features/todo_model.dart';
 
 abstract interface class TodoRepository<Error> {
   Future<SimpleResult<List<Todo>, Error>> getTodoList();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/model/vo_todo.dart';
+import 'package:todolist/features/todo_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TodoListFragment extends StatelessWidget {
